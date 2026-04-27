@@ -36,17 +36,27 @@ Node head=null;
 
 void AddTimber() {
 
- Node newnode;
+
  int id;
  System.out.println("Please Enter The Below Mentioned Values For The New Node \n");
  System.out.println("Timber Id :");
  id=input.nextInt();
+
+
+
+while(id<1){
+	 System.out.println("Invalid Id Input ! Id Should Be Greater Than 0 \n");
+	 System.out.println("Please Re-enter Id\n");
+	 id=input.nextInt();
+ }
  Node temp=head;
  while(temp!=null){
      if(temp.TimberId == id){
          System.out.println("Sorry The Timber Id Is Already Present . Kindly Enter Another \n");
          return;
      }
+
+
      temp=temp.next;
  }
 
@@ -57,15 +67,37 @@ void AddTimber() {
  String TimberKind=input.nextLine();
  System.out.println("Timber Weight(Kg):");
  float Weight=input.nextFloat();
+
+ 	 while(Weight<0.0){
+ 	 System.out.println("Invalid Weight Input ! Weight Should Be Greater Than 0 \n");
+ 	 System.out.println("Please Re-enter Weight\n");
+ 	 Weight=input.nextFloat();}
+
+
  input.nextLine();
  System.out.println("Status (In Stock / Sold / Reserved) :");
  String Status=input.nextLine();
  System.out.println("Timber Height(m) :");
  float Height=input.nextFloat();
+
+  	 while(Height<0.0){
+  	 System.out.println("Invalid Height Input ! Weight Should Be Greater Than 0 \n");
+  	 System.out.println("Please Re-enter Weight\n");
+  	 Height=input.nextFloat();}
+
+
  System.out.println("Timber Quantity :");
  int Quantity=input.nextInt();
+  while(Quantity<0){
+   	 System.out.println("Invalid Quantity Input ! Quantity Should Be Greater Than 0 \n");
+   	 System.out.println("Please Re-enter Quantity\n");
+  	 Quantity=input.nextInt();}
  System.out.println("Timber Price(Rs) :");
  int Price=input.nextInt();
+ while(Price<0){
+    	 System.out.println("Invalid Price Input ! Price Should Be Greater Than 0 \n");
+    	 System.out.println("Please Re-enter Price\n");
+  	 Price=input.nextInt();}
  input.nextLine();
 
  System.out.println("Cut Date");
@@ -75,11 +107,15 @@ void AddTimber() {
 
  newNode.next = head;
  head = newNode;
-
  System.out.println("Added Successfully!\n");
 }
 
 void DisplayRecordsZone() {
+
+
+if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
+
+else{
 
  char zone;
  System.out.println("Please Enter The Zone\n");
@@ -88,6 +124,8 @@ void DisplayRecordsZone() {
  Node temp=head;
  while(temp != null)
  {
+
+
      if(temp.Zone==zone){
          display(temp);
          found = true;
@@ -96,11 +134,16 @@ void DisplayRecordsZone() {
  }
  if(!found){
      System.out.println("No Timber Record Was Found Accordimg To The Entered Zone \n");
- }
+ }}
 }
 
 void DisplayRecordsKind() {
-    System.out.println("Please Enter The KInd Of Timber :\n");
+
+
+
+if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
+else{
+    System.out.println("Please Enter The KInd Of Timber (oak, pine, cedar, mahogany, teak, plywood) :\n");
     input.nextLine();
     String kind = input.nextLine();
     Node temp = head;
@@ -116,21 +159,30 @@ void DisplayRecordsKind() {
 
     if(!found){
         System.out.println("No Record Has Been Found As Per The Input Kind Of Timber\n");
-    }
+    }}
 }
 
 void Analysis() {
+
+if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
+else{
+
  Node temp=head;
  while(temp!=null)
  {
      if(temp.Quantity<100){
          display(temp);
      }
+
      temp=temp.next;
- }
+ }}
 }
 
 void SalesUpdate() {
+
+
+	if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
+	else{
  int id;
  int q;
  Node temp=head;
@@ -158,17 +210,22 @@ void SalesUpdate() {
          }
      }
      temp = temp.next;
- }
+ }}
 }
 
 void DeleteTimberRecord() {
- int id;
 
+
+ int id;
  Node temp=head;
  Node pre=null;
  System.out.println("Please Enter The Timber Id You Want To Delete \n");
  id=input.nextInt();
-
+ if(head==null)
+ {
+	 System.out.println("No Records Are Present. Kindly Add Records First \n");
+	return;
+ }
  while(temp!=null)
  {
      if(temp.TimberId==id)
@@ -193,12 +250,18 @@ void DeleteTimberRecord() {
 void UpdateTimberRecord() {
  int id;
 
+if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");
+
+}
  Node temp=head;
  System.out.println("Please Enter The Timber Id You Want To Update \n");
  id=input.nextInt();
  while(temp!=null)
  {
+
      if(temp.TimberId==id){
+
+
          System.out.println("Please Enter The New Quantity\n");
          temp.Quantity=input.nextInt();
 
@@ -215,6 +278,10 @@ void UpdateTimberRecord() {
 }
 
 void InventoryReport() {
+
+
+if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
+if(head!=null){
  Node temp=head;
  int TotalValue=0;
  float average=0;
@@ -237,7 +304,7 @@ void InventoryReport() {
  System.out.printf("Total Records Of Timber are %d \n",Count);
  System.out.printf("Total Value Of Timber are %d \n",TotalValue);
  average=(float)TotalValue/Count;
- System.out.printf("The Average Rate Per Timber Is %f ",average);
+ System.out.printf("The Average Rate Per Timber Is %f ",average);}
 }
 
 void display(Node n) {
