@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class MuhammadUmarTimberStore
 {
@@ -40,15 +41,18 @@ void AddTimber() {
  int id;
  System.out.println("Please Enter The Below Mentioned Values For The New Node \n");
  System.out.println("Timber Id :");
- id=input.nextInt();
 
-
-
-while(id<1){
-	 System.out.println("Invalid Id Input ! Id Should Be Greater Than 0 \n");
-	 System.out.println("Please Re-enter Id\n");
-	 id=input.nextInt();
- }
+while (true) {
+    try {
+        id = input.nextInt();
+       if (id < 1) {
+            System.out.println("Id must be greater than 0. Try again:");
+            continue;}
+        break;} catch (InputMismatchException e) {
+        System.out.println("Invalid input! Enter a valid integer:");
+        input.next();
+    }
+}
  Node temp=head;
  while(temp!=null){
      if(temp.TimberId == id){
@@ -62,42 +66,81 @@ while(id<1){
 
  System.out.print("Zone (A,B,C,D,E) : ");
  char zone = input.next().charAt(0);
+
  input.nextLine();
  System.out.println("Timber Kind (oak, pine, cedar, mahogany, teak, plywood) :");
  String TimberKind=input.nextLine();
+ float Weight;
  System.out.println("Timber Weight(Kg):");
- float Weight=input.nextFloat();
-
- 	 while(Weight<0.0){
- 	 System.out.println("Invalid Weight Input ! Weight Should Be Greater Than 0 \n");
- 	 System.out.println("Please Re-enter Weight\n");
- 	 Weight=input.nextFloat();}
-
-
+while (true) {
+    try {
+         Weight = input.nextFloat();
+        if (Weight < 0) {
+            System.out.println("Weight must be positive. Try again:");
+            continue;
+        }
+        break;
+    } catch (InputMismatchException e) {
+        System.out.println("Invalid input! Enter a valid number:");
+        input.next();
+    }
+}
  input.nextLine();
  System.out.println("Status (In Stock / Sold / Reserved) :");
+
  String Status=input.nextLine();
  System.out.println("Timber Height(m) :");
- float Height=input.nextFloat();
-
-  	 while(Height<0.0){
-  	 System.out.println("Invalid Height Input ! Weight Should Be Greater Than 0 \n");
-  	 System.out.println("Please Re-enter Weight\n");
-  	 Height=input.nextFloat();}
-
+ float Height;
+while (true) {
+    try {
+        Height = input.nextFloat();
+        if (Height < 0) {
+            System.out.println("Height must be positive. Try again:");
+            continue;
+        }
+        break;
+    } catch (InputMismatchException e) {
+        System.out.println("Invalid input! Enter a valid number:");
+        input.next();
+    }
+}
 
  System.out.println("Timber Quantity :");
- int Quantity=input.nextInt();
-  while(Quantity<0){
-   	 System.out.println("Invalid Quantity Input ! Quantity Should Be Greater Than 0 \n");
-   	 System.out.println("Please Re-enter Quantity\n");
-  	 Quantity=input.nextInt();}
+ int Quantity;
+
+while (true) {
+    try {
+        Quantity = input.nextInt();
+        if (Quantity < 0) {
+            System.out.println("Quantity must be positive. Try again:");
+            continue;
+        }
+        break;
+    } catch (InputMismatchException e) {
+        System.out.println("Invalid input! Enter a valid number:");
+        input.next();
+    }
+}
  System.out.println("Timber Price(Rs) :");
- int Price=input.nextInt();
- while(Price<0){
-    	 System.out.println("Invalid Price Input ! Price Should Be Greater Than 0 \n");
-    	 System.out.println("Please Re-enter Price\n");
-  	 Price=input.nextInt();}
+ int Price;
+
+while (true) {
+    try {
+        Price = input.nextInt();
+        if (Price < 0) {
+            System.out.println("Price must be positive. Try again:");
+            continue;
+        }
+        break;
+    } catch (InputMismatchException e) {
+        System.out.println("Invalid input! Enter a valid number:");
+        input.next();
+    }
+}
+
+
+
+
  input.nextLine();
 
  System.out.println("Cut Date");
@@ -122,9 +165,10 @@ else{
  zone = input.next().charAt(0);
  boolean found = false;
  Node temp=head;
+
+
  while(temp != null)
  {
-
 
      if(temp.Zone==zone){
          display(temp);
@@ -138,8 +182,6 @@ else{
 }
 
 void DisplayRecordsKind() {
-
-
 
 if(head==null){System.out.println("No Record Availaibe . Kindly Add First\n");}
 else{
@@ -327,6 +369,7 @@ public static void main(String args[])
  MuhammadUmarTimberStore TimberStore =new MuhammadUmarTimberStore();
  int choice=0;
 
+
  while(choice!=9){
 
  System.out.println("Kindly Follow The Following Menue \n");
@@ -342,7 +385,15 @@ public static void main(String args[])
  System.out.println("(9) Exit");
 
  System.out.println("Enter Choice\n");
- choice=input.nextInt();
+ while (true) {
+     try {
+         choice = input.nextInt();
+         break;
+     } catch (InputMismatchException e) {
+         System.out.println("Invalid choice! Enter a number (1–9):");
+         input.next();
+     }
+}
 
  if(choice==1){
      System.out.println("You Chose \n(1) Add a new Timber records\n\n");
